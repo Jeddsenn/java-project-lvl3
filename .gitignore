@@ -10,4 +10,4 @@ build
 bin
 .project*
 .classpath
-../TESTINGSOMEHOS/src/main/resources/.idea/
+../app/src/main/resources/.idea/
