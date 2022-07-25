@@ -25,6 +25,8 @@ public class StringSchema {
         }
         return true;
     }
+
+
     public String contains(String str){  //  contains – строка содержит определённую подстроку
         this.contains.add(str);
         return str;
