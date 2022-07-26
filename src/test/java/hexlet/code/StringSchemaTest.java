@@ -1,9 +1,8 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class StringSchemaTest {
 
@@ -23,7 +22,7 @@ class StringSchemaTest {
         assertTrue(schema.isValid("hexlet")); // true
         assertFalse(schema.isValid(null)); // false
         assertFalse(schema.isValid("")); // false
-/*
+
         assertTrue(schema.contains("wh").isValid("what does the fox say")); // true
         assertTrue(schema.contains("what").isValid("what does the fox say")); // true
         assertFalse(schema.contains("whatthe").isValid("what does the fox say")); // false*/
