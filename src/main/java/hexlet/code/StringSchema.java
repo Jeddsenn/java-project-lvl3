@@ -24,6 +24,11 @@ public final class StringSchema {
                 return false;
             }
         }
+        if (str != null) {
+            if (str.length() < this.minLength) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -39,8 +44,8 @@ public final class StringSchema {
         return this;
     }
 
-/*    public StringSchema minLength(int minLength) {  // minLength – строка равна или длиннее указанного числа
+    public StringSchema minLength(int minLength) {  // minLength – строка равна или длиннее указанного числа
         this.minLength = minLength;
         return this;
-    }*/
+    }
 }
