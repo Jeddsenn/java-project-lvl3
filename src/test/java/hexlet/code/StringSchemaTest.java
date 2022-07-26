@@ -25,9 +25,11 @@ class StringSchemaTest {
 
         assertTrue(schema.contains("wh").isValid("what does the fox say")); // true
         assertTrue(schema.contains("what").isValid("what does the fox say")); // true
-        assertFalse(schema.contains("whatthe").isValid("what does the fox say")); // false*/
-
-        assertFalse(schema.isValid("what does the fox say")); // false
+        assertFalse(schema.contains("whatthe").isValid("what does the fox say")); // false
         // уже false, так как добавлена ещё одна проверка contains("whatthe")
+        assertFalse(schema.minLength(5).isValid("what does the fox say"));
+  //      assertTrue(schema.minLength(10).contains("wh").isValid("what does the fox say")); // true
+        assertFalse(schema.isValid("what does the fox say")); // false
+
     }
 }
