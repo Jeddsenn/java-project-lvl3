@@ -3,23 +3,24 @@ package hexlet.code;
 import java.util.LinkedList;
 import java.util.List;
 
-public class StringSchema {
-    List<String> contains;
-    boolean required;
-    int minLength;
+public final class StringSchema {
+    private List<String> contains;
+    private boolean required;
+    private int minLength;
 
-    StringSchema(){
+    StringSchema() {
         this.contains = new LinkedList<>();
         this.required = false;
+        this.minLength = -1;
     }
 
 
-    public boolean isValid(String str) {     // входной параметр соответствует всему остальному ю ноу
-        if (this.required && ((str.equals("")) || str == null)) {
+    public boolean isValid(String str) {        // входной параметр соответствует всему остальному ю ноу
+        if (this.required && ((str == null) || str.equals(""))) {
             return false;
         }
-        for (String contain : this.contains) {
-            if (!str.contains(contain)){
+        for (String c : this.contains) {
+            if (!str.contains(c)) {
                 return false;
             }
         }
@@ -27,19 +28,19 @@ public class StringSchema {
     }
 
 
-    public String contains(String str){  //  contains – строка содержит определённую подстроку
+    public StringSchema contains(String str) {  //  contains – строка содержит определённую подстроку
         this.contains.add(str);
-        return str;
+        return this;
     }
 
 
-    public void required() {    // required – любая непустая строка
+    public StringSchema required() {    // required – любая непустая строка
         this.required = true;
+        return this;
     }
 
-    public boolean minLength(String str){  // minLength – строка равна или длиннее указанного числа
-        return false;
-    }
-
-
+/*    public StringSchema minLength(int minLength) {  // minLength – строка равна или длиннее указанного числа
+        this.minLength = minLength;
+        return this;
+    }*/
 }
