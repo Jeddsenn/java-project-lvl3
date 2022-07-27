@@ -8,7 +8,7 @@ public final class StringSchema {
     private boolean required;
     private int minLength;
 
-    StringSchema() {
+    public StringSchema() {
         this.contains = new LinkedList<>();
         this.required = false;
         this.minLength = -1;
