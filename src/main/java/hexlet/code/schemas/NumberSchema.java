@@ -1,37 +1,37 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
-import java.util.LinkedList;
-
-public class NumberSchema {
+public class NumberSchema extends BaseSchema {
     private boolean required;
     private boolean positive;
     private int min;
     private int max;
 
-
     public NumberSchema() {
         this.required = false;
         this.positive = false;
+        this.max = Integer.MAX_VALUE;
+        this.min = Integer.MIN_VALUE;
     }
 
     public boolean isValid(Object num){
-        if (this.required){
+        super.isValid(num);
+
+        if (required){
             if (!(num instanceof Number)){
                 return false;
             }
         }
-
-        int castedNum = 0;
-
+        Integer castedNum = 0;
         if (num instanceof Number) {
-            castedNum = (int) num;
+            castedNum = (Integer) num;
         }
 
         if (this.positive) {
-            if ( castedNum <= 0){
+            if (castedNum <= 0){
                 return false;
             }
         }
+
         if (castedNum < this.min || castedNum > this.max){
             return false;
         }
