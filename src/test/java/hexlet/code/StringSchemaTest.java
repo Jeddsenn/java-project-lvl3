@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
+import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -43,10 +43,10 @@ class StringSchemaTest {
         assertFalse(schema.contains("whatthe").isValid("what does the fox say")); // false
 
 
-/*
+
         assertFalse(schema.minLength(0).isValid("what does the fox say"));
         assertTrue(schema.minLength(1).isValid("what does the fox say")); // true
-*/
+
         assertFalse(schema.isValid("what does the fox say")); // false
 
 
