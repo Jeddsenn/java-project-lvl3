@@ -1,12 +1,12 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 
 import java.util.LinkedList;
 import java.util.List;
 
-public final class StringSchema {
-//    private String contains;
-    private List<String> contains;
+public final class StringSchema extends BaseSchema {
+//  private String contains;
+    private final List<String> contains;
     private boolean required;
     private boolean minLengthCondition;
     private int minLength;
@@ -21,24 +21,24 @@ public final class StringSchema {
 
     public boolean isValid(String str) {    // входной параметр соответствует всему остальному ю ноу
         boolean isValid = true;
-        boolean isNull = str == null;
+        super.isValid(str);
 
         if (this.required) {
-            if ((str == null) || str.equals("")) {
-                isNull = true;
+            if (str.equals("")) {
                 isValid = false;
             }
         }
 
-        if (!isNull && !this.contains.isEmpty()) {
+        if (!this.contains.isEmpty()) {
             for (String s : this.contains) {
                 if (!str.contains(s)) {
                     isValid = false;
+                    break;
                 }
             }
         }
 
-        if (minLength != -1 && !isNull) {
+        if (minLength != -1) {
             if (this.minLength > str.length()) {
                 return false;
             }
