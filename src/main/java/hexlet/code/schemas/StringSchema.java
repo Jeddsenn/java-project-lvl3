@@ -3,47 +3,54 @@ package hexlet.code.schemas;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public final class StringSchema extends BaseSchema {
-//  private String contains;
     private final List<String> contains;
-    private boolean required;
-    private boolean minLengthCondition;
+    private boolean minimalLengthCondition;
     private int minLength;
 
     public StringSchema() {
- //     this.contains = new String("");
+        super();
         this.contains = new LinkedList<>();
-        this.required = false;
-        this.minLength = -1;
-        this.minLengthCondition = false;
+        this.minLength = Integer.MIN_VALUE;
+        this.minimalLengthCondition = false;
     }
 
-    public boolean isValid(String str) {    // входной параметр соответствует всему остальному ю ноу
-        boolean isValid = true;
-        super.isValid(str);
+    @Override
+    public boolean isValid(Object str) {    // входной параметр соответствует активным условиям
+        boolean isNull = str == null;
+        String string = "";
 
-        if (this.required) {
-            if (str.equals("")) {
-                isValid = false;
+        if (!super.isValid(str)) {
+            if (isRequired()) {
+                return false;
+            }
+        } else if (Objects.equals(str, "")) {
+            if (isRequired()) {
+                return false;
             }
         }
 
+        if (str instanceof String) {
+            string = (String) str;
+        }
+
+
         if (!this.contains.isEmpty()) {
             for (String s : this.contains) {
-                if (!str.contains(s)) {
-                    isValid = false;
-                    break;
+                if (!string.contains(s)) {
+                    return false;
                 }
             }
         }
 
-        if (minLength != -1) {
-            if (this.minLength > str.length()) {
+        if (minimalLengthCondition) {
+            if (string.length() < minLength) {
                 return false;
             }
         }
-        return isValid;
+        return true;
     }
 
     public StringSchema contains(String str) {  //  contains – строка содержит определённую подстроку
@@ -53,13 +60,77 @@ public final class StringSchema extends BaseSchema {
 
 
     public StringSchema required() {    // required – любая непустая строка
-        this.required = true;
+        setRequired(true);
         return this;
     }
 
     public StringSchema minLength(int minLength) {  // minLength – строка равна или длиннее указанного числа
         this.minLength = minLength;
-        this.minLengthCondition = true;
+        this.minimalLengthCondition = true;
         return this;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    boolean isValid = true;
+    boolean isNull = str == null;
+
+        if (isRequired()) {
+        isValid(str);
+    }
+        if (isRequired() && !isNull) {
+        if (str.equals("")) {
+            isValid = false;
+        }
+    }
+    String string = "";
+        if (str instanceof String){
+        string = (String) str;
+    }
+
+        if (!this.contains.isEmpty()) {
+        for (String s : this.contains) {
+            if (!string.contains(s)) {
+                isValid = false;
+                break;
+            }
+        }
+    }
+
+        if (minLength != -1) {
+        if (this.minLength > string.length()) {
+            return false;
+        }
+    }
+        return isValid;
+}*/
