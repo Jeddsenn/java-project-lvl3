@@ -6,6 +6,7 @@ public class NumberSchema extends BaseSchema {
     private int max;
 
     public NumberSchema() {
+        super();
         this.required = false;
         this.positive = false;
         this.max = Integer.MAX_VALUE;
@@ -13,13 +14,19 @@ public class NumberSchema extends BaseSchema {
     }
     @Override
     public boolean isValid(Object num){
-        super.isValid(num);
 
-        if (isRequired()){
+      if (isRequired()){
             if (!(num instanceof Number)){
                 return false;
             }
         }
+
+        if (!super.isValid(num)) {
+            if (isRequired()) {
+                return false;
+            }
+        }
+
         Integer castedNum = 0;
         if (num instanceof Number) {
             castedNum = (Integer) num;
@@ -38,7 +45,7 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema required() {    // required – любое число включая ноль
-        super.setRequired(true);
+        setRequired(true);
         return this;
     }
 
