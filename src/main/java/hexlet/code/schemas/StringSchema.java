@@ -19,7 +19,6 @@ public final class StringSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object str) {    // входной параметр соответствует активным условиям
-        boolean isNull = str == null;
         String string = "";
 
         if (!super.isValid(str)) {
