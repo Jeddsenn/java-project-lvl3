@@ -1,16 +1,14 @@
 package hexlet.code.schemas;
 
-
 import java.util.Map;
 
-
-public class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema {
     private int size;
     private boolean sizeCheck;
     private Map<String, BaseSchema> shape;
     private boolean shapeCheck;
 
-    public MapSchema(){
+    public MapSchema() {
         super();
         this.size = 0;
         this.sizeCheck = false;
@@ -25,31 +23,39 @@ public class MapSchema extends BaseSchema {
             }
         }
 
-        Map<String, Object> m = null;
-        if (map instanceof Map<?,?>){
-            m = (Map<String, Object>) map;
+        Map<String, BaseSchema> m = null;
+        if (map instanceof Map<?, ?>) {
+            m = (Map<String, BaseSchema>) map;
         }
 
         if (sizeCheck) {
-                if (m == null) {
-                    return false;
-                } else if (m.size() != this.size) {
+            if (m == null) {
+                return false;
+            } else if (m.size() != this.size) {
+                return false;
+            }
+        }
+
+        if (shapeCheck) {
+            for (String key : m.keySet()) {
+                BaseSchema sh = shape.get(key);
+                if (!sh.isValid(m.get(key))) {
                     return false;
                 }
             }
-
-
-
+        }
         return true;
     }
+
 
     public MapSchema required() {   //required – требуется тип данных Map
         setRequired(true);
         return this;
     }
 
-    public MapSchema sizeof(int size) {//sizeof – количество пар ключ-значений в объекте Map должно быть равно заданному
-        this.size = size;
+    //sizeof – количество пар ключ-значений в объекте Map должно быть равно заданному
+    public MapSchema sizeof(int sz) {
+        this.size = sz;
         this.sizeCheck = true;
         return this;
     }
