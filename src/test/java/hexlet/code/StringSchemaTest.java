@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class StringSchemaTest {
+    public static final int NUM_TO_CHECK_100 = 100;
+
 
     @Test
     void isValid() {
@@ -44,11 +46,8 @@ class StringSchemaTest {
         assertTrue(schema.contains("what").isValid("what does the fox say")); // true
         assertFalse(schema.contains("whatthe").isValid("what does the fox say")); // false
 
-        assertFalse(schema.minLength(100).isValid("what does the fox say"));
-
+        assertFalse(schema.minLength(NUM_TO_CHECK_100).isValid("what does the fox say"));
 
         assertFalse(schema.isValid("what does the fox say")); // false
-
-
     }
 }

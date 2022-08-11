@@ -1,16 +1,17 @@
 package hexlet.code;
 
-import hexlet.code.Validator;
+
 import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MapSchemaTest {
+    public static final int NUM_TO_CHECK_100 = 100;
+    public static final int NUM_TO_CHECK_NEGATIVE5 = -5;
     @Test
     void isValid() {
         Validator v = new Validator();
@@ -20,7 +21,7 @@ class MapSchemaTest {
         assertTrue(schema.isValid(null)); // true
         schema.required();
 
-       assertFalse(schema.isValid(null)); // false
+        assertFalse(schema.isValid(null)); // false
 
         assertTrue(schema.isValid(new HashMap())); // true
         Map<String, String> data = new HashMap<>();
@@ -29,7 +30,7 @@ class MapSchemaTest {
 
         assertTrue(schema.isValid(data)); // true
 
-         schema.sizeof(2);
+        schema.sizeof(2);
 
         assertFalse(schema.isValid(data)); // false
 
@@ -51,7 +52,7 @@ class MapSchemaTest {
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);
+        human1.put("age", NUM_TO_CHECK_100);
         assertTrue(schema.isValid(human1)); // true
 
         Map<String, Object> human2 = new HashMap<>();
@@ -66,7 +67,7 @@ class MapSchemaTest {
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", -5);
- //       assertFalse(schema.isValid(human4)); // false
+        human4.put("age", NUM_TO_CHECK_NEGATIVE5);
+        assertFalse(schema.isValid(human4)); // false
     }
 }
