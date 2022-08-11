@@ -28,9 +28,6 @@ dependencies {
 
 }
 
-compileJava {
-    options.release = 17
-}
 
 test {
     useJUnitPlatform()
