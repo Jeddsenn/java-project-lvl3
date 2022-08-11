@@ -45,9 +45,7 @@ public final class StringSchema extends BaseSchema {
         }
 
         if (minimalLengthCondition) {
-            if (string.length() < minLength) {
-                return false;
-            }
+            return string.length() >= minLength;
         }
         return true;
     }
@@ -63,8 +61,8 @@ public final class StringSchema extends BaseSchema {
         return this;
     }
 
-    public StringSchema minLength(int minLength) {  // minLength – строка равна или длиннее указанного числа
-        this.minLength = minLength;
+    public StringSchema minLength(int ml) {  // minLength – строка равна или длиннее указанного числа
+        this.minLength = ml;
         this.minimalLengthCondition = true;
         return this;
     }
