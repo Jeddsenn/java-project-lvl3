@@ -1,20 +1,26 @@
 package hexlet.code.schemas;
 
 public abstract class  BaseSchema {
-    public boolean required;
+    private boolean required;
+
 
     public BaseSchema() {
         required = false;
     }
-    public boolean isValid(Object obj){
+
+    /**
+     * @param obj Object
+     * @return boolean
+     */
+    public boolean isValid(Object obj) {
         return obj != null;
     }
 
-    public boolean isRequired() {
+    public final boolean isRequired() {
         return required;
     }
 
-    public void setRequired(boolean required) {
-        this.required = required;
+    public final void setRequired(boolean rq) {
+        this.required = rq;
     }
 }
