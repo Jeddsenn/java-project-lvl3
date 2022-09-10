@@ -1,26 +1,45 @@
 package hexlet.code.schemas;
 
-public abstract class  BaseSchema {
-    private boolean required;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 
-    public BaseSchema() {
-        required = false;
+public abstract class BaseSchema {
+
+    private boolean isRequired = false;
+    private final List<Predicate> predicateList = new ArrayList<>();
+    private final Class requiredClass;
+
+    public BaseSchema(Class aClass) {
+        this.requiredClass = aClass;
     }
 
-    /**
-     * @param obj Object
-     * @return boolean
-     */
-    public boolean isValid(Object obj) {
-        return obj != null;
+    public final boolean isValid(Object object) {
+        if (predicateList.size() == 0 && !isRequired) {
+            return true;
+        }
+        if (object == null) {
+            return !isRequired;
+        }
+        if (!requiredClass.isInstance(object)) {
+            return false;
+        }
+        for (Predicate predicate : predicateList) {
+            if (!predicate.test(object)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public final boolean isRequired() {
-        return required;
+    protected final void addValidationToList(Predicate validationValue) {
+        predicateList.add(validationValue);
     }
 
-    public final void setRequired(boolean rq) {
-        this.required = rq;
+    public abstract BaseSchema required();
+
+    protected final void setRequired(boolean required) {
+        isRequired = required;
     }
 }
