@@ -14,7 +14,6 @@ class NumberSchemaTest {
     public static final int NUM_TO_CHECK_NEGATIVE10 = -10;
 
 
-
     @Test
     void isValid() {
         Validator v = new Validator();
@@ -27,6 +26,7 @@ class NumberSchemaTest {
         assertTrue(schema.isValid(NUM_TO_CHECK_10)); // true
         assertFalse(schema.isValid("5")); // false
 
+
         assertTrue(schema.positive().isValid(NUM_TO_CHECK_10)); // true
         assertFalse(schema.isValid(NUM_TO_CHECK_NEGATIVE10)); // false
 
@@ -36,7 +36,6 @@ class NumberSchemaTest {
         assertTrue(schema.isValid(NUM_TO_CHECK_10)); // true
         assertFalse(schema.isValid(NUM_TO_CHECK_4)); // false
         assertFalse(schema.isValid(NUM_TO_CHECK_11)); // false
-
     }
 
     @Test
@@ -46,5 +45,6 @@ class NumberSchemaTest {
 
         assertTrue(schema.isValid(null)); // true
         schema.required();
+        assertFalse(schema.isValid(null)); // false
     }
 }

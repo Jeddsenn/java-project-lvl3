@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class StringSchemaTest {
     public static final int NUM_TO_CHECK_100 = 100;
 
-
     @Test
     void isValid() {
         Validator v = new Validator();
